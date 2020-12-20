@@ -10,7 +10,7 @@ n = 64
 L = sqrt(real(n)/rho)
 sigma = 1.d0
 print *, L
-allocate(grid(64,2))
+allocate(grid(n,2))
 do i = 1,8 
     do j = 1, 8
         index =  8*(i-1) + j
@@ -59,7 +59,7 @@ end subroutine mc_step
 
 subroutine printxyz()
 integer :: i,j
-open(21,file="test094.xyz",status='unknown',position= "append",action='write',form='formatted')
+open(21,file="traj.xyz",status='unknown',form='formatted', ACCESS='APPEND')
 write(21,*)64
 write(21,*)"cc"
 do i = 1, 8
@@ -67,7 +67,7 @@ do i = 1, 8
         write(21,'(a2,3f15.6)') "H", grid((i-1)*8+j,1:2), 0.d0
     end do
 end do
- close(21)
+close(21)
 end subroutine printxyz
 
 end module mc
